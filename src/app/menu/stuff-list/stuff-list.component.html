@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wypozyczalnia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--google font-->
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:300,400,500" rel="stylesheet">
+
+    <!-- Biblioteka jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Biblioteka Mustache.js - szablony w html -->
+    <script type="application/javascript" src="js/lib/mustache.min.js"></script>
+    <script type="application/javascript">
+
+        // $ - jQuery
+        // funkcja zostanie uruchomiona dopiero po wczytaniu całego dokumentu HTML przez przeglądarkę
+        $(document).ready(function(){
+
+            // wczytujemy szablon z pliku 'header.mst.html'
+            $.get('header.mst.html', function(template) {
+
+                // Renderujemy szablon, czyli wypełniamy danymi.
+                // Aby zaznaczyć konkretną opcję w menu, możemy przekazać jedną z właściwości:
+                //  - activeList, activeAdd, activeEdit, activeCustomers
+                var rendered = Mustache.render(template, {headerTitle: "Nagłówek z Mustache", activeList: true});
+
+                // Załączamy wyrenderowany szablon w odpowiednim miejscu na stronie
+                $('#main-nav').html(rendered);
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+<div class="wrapper">
+
+    <!-- Mustache.js - szablon nagłówka -->
+    <div id="main-nav"></div>
+
+    
+
+    <div class="gray-section admin-section">
+        <div class="container">
+            <table class="carsTable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nazwa</th>
+                    <th>Cena</th>
+                    <th>Ilość</th>
+                    <th>Dodaj/Odejmij</th>
+                    <th>Usuń</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let stuff of stuff; let i = index">
+                    <td class="hover-link">
+                        {{i+1}}</td>
+                     <td>{{stuff.name}}</td>
+                    <td>{{stuff.price}}</td>
+                    <td>{{stuff.amount}}</td>
+                    <td><button class="button button-green" (click)="stuffService.dodaj(i)">Dodaj</button>
+                    <button class="button button-blue" (click)="stuffService.odejmij(i)">Odejmij</button></td>
+                    <td><button class="button button-red" (click)="stuffService.usun(i)">Usuń</button></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>Copyright © 2017</p>
+    </footer>
+</div>
+
+<script type="application/javascript" src="js/CarsRentaApplication.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+header
+{
+    background-color: rgb(51, 233, 51);
+}
+
+h2
+{
+    text-align: center;
+    padding: 10px;
+}
+
+header img
+{
+    display: block;
+    margin: auto;
+    width: 500px;
+    height: 300px;
+    border-top-right-radius: 100px;
+    border-top-left-radius: 1px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 100px;
+}
